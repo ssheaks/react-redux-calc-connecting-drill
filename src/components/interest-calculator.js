@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import { setPrincipal, setInterest, setYears } from '../actions';
+
 // Connect this component
 function InterestCalculator(props) {
     return (
@@ -8,17 +10,23 @@ function InterestCalculator(props) {
             onSubmit={e => e.preventDefault()}>
             <div className="form-group">
                 <label htmlFor="principal">Principal ($)</label>
-                <input type="number" id="principal" value={props.principal}
+                <input 
+                onChange={e => props.dispatch(setPrincipal(e.target.value))}
+                type="number" id="principal" value={props.principal}
                     min="0" />
             </div>
             <div className="form-group">
                 <label htmlFor="interest">Interest rate (%)</label>
-                <input type="number" id="interest" value={props.interest}
+                <input
+                onChange={e => props.dispatch(setInterest(e.target.value))}
+                type="number" id="interest" value={props.interest}
                     min="0" max="100" step="0.1" />
             </div>
             <div className="form-group">
                 <label htmlFor="years">Years</label>
-                <input type="number" id="years" value={props.years}
+                <input
+                onChange={e => props.dispatch(setYears(e.target.value))}
+                type="number" id="years" value={props.years}
                     min="0" max="100" />
             </div>
             <div className="form-group">
@@ -37,7 +45,7 @@ InterestCalculator.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    console.log(state.principal)
+    console.log(state.years)
     return {
     principal: state.principal,
     interest: state.interest,
